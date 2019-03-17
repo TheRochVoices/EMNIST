@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> User Input</title>
+  <style type="text/css">
+  canvas{
+    border:1px solid black;
+  }
+  </style>
+</head>
+<body>
+<canvas id="board" width="800" height="600"></canvas>
+<script type = "text/javascript">
+    var md = false;
+    var canvas = document.getElementById("board");
+    canvas.addEventListener('mousedown', down);
+    canvas.addEventListener('mouseup', toggledraw);
+    canvas.addEventListener('mousemove',
+    function(evt)
+    {
+      var mousepos = getMosuePos(canvas, evt);
+      var posx = mousepos.x;
+      var posy = mousepos.y;
+      draw(canvas, posx, posy);
+    });
+    function down()
+    {
+      md = true;
+    }
+    function toggledraw()
+    {
+      md = false;
+    }
+    function getMousePos(canvas, evt)
+    {
+      var rect = canvas.getBoundingClientRect();
+      return{
+          x:evt.clientX - rect.left,
+          y:evt.clientY - rect.top
+      };
+    }
+    function draw(canvas, posx, posy)
+    {
+      var context = canvas.getContext('2d')
+      if(md)
+      {
+        context.fillRect(posx, posy, 4, 4);
+      }
+    }
+
+</body>
+</html>
